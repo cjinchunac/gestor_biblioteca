@@ -6,13 +6,7 @@ struct correo {
     string domain;
 };
 
-struct libro {
-    int ID;
-    string titulo;
-    string autor;
-    string genero;
-    int cantidad;
-};
+
 
 struct usuario {
     int DNI;
@@ -28,10 +22,7 @@ struct prestamo {
     int devuelto;
 };
 
-void leerlibro(libro &lib, int id, string tit, string aut, string gen, int cant);
-void imprimelibro(libro &lib);
-void modificardatolibro(libro &lib);
-void borrarlibro(libro lista_libros[], int &n);
+
 
 void leerUsuario(usuario &u, int dni, string nom, string email_user, string email_domain);
 void imprimirUsuario(usuario &u);
@@ -42,8 +33,7 @@ int puedePrestarMas(prestamo prestamos[], int n_prestamos, int DNI);
 void registrarPrestamo(libro lista_libros[], int n_libros, prestamo prestamos[], int &n_prestamos, usuario usuarios[], int n_usuarios);
 void mostrarPrestamosUsuario(prestamo prestamos[], int n_prestamos);
 void devolverLibro(libro lista_libros[], int n_libros, prestamo prestamos[], int &n_prestamos);
-void buscarPorAutor(libro lista_libros[], int n);
-void buscarPorGenero(libro lista_libros[], int n);
+
 
 int main() {
     libro lista_libros[100];
