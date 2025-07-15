@@ -1,39 +1,9 @@
 #include <iostream>
+#include <string>
+#include "libro.h"
+#include "usuario.h"
+#include "prestamo.h"
 using namespace std;
-
-struct correo {
-    string user;
-    string domain;
-};
-
-
-
-struct usuario {
-    int DNI;
-    string nombre;
-    correo email; 
-};
-
-struct prestamo {
-    libro libroPrestado;
-    usuario usuarioPrestamo;
-    int fecha_prestamo[3];
-    int fecha_devolucion[3];
-    int devuelto;
-};
-
-
-
-void leerUsuario(usuario &u, int dni, string nom, string email_user, string email_domain);
-void imprimirUsuario(usuario &u);
-void registrarUsuario(usuario usuarios[], int &n_usuarios);
-void mostrarUsuarios(usuario usuarios[], int n_usuarios);
-
-int puedePrestarMas(prestamo prestamos[], int n_prestamos, int DNI);
-void registrarPrestamo(libro lista_libros[], int n_libros, prestamo prestamos[], int &n_prestamos, usuario usuarios[], int n_usuarios);
-void mostrarPrestamosUsuario(prestamo prestamos[], int n_prestamos);
-void devolverLibro(libro lista_libros[], int n_libros, prestamo prestamos[], int &n_prestamos);
-
 
 int main() {
     libro lista_libros[100];

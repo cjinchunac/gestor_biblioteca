@@ -1,4 +1,5 @@
 #include "prestamo.h"
+
 #include <iostream>
 #include <string>
 using namespace std;
@@ -120,7 +121,7 @@ void mostrarPrestamosUsuario(prestamo prestamos[], int n_prestamos) {
             cout << "Autor: " << prestamos[i].libroPrestado.autor << endl;
             cout << "Fecha prestamo: " << prestamos[i].fecha_prestamo[0] << "/" 
                  << prestamos[i].fecha_prestamo[1] << "/" << prestamos[i].fecha_prestamo[2] << endl;
-            cout << "Fecha devolucion: " << prestamos[i].fecha_devolucion[0] << "/" 
+            cout << "Fecha devolucion maxima: " << prestamos[i].fecha_devolucion[0] << "/" 
                  << prestamos[i].fecha_devolucion[1] << "/" << prestamos[i].fecha_devolucion[2] << endl;
             cout << "Estado: " << (prestamos[i].devuelto ? "Devuelto" : "Pendiente") << endl;
             contador++;

@@ -1,6 +1,6 @@
 #include "usuario.h"
 #include <iostream>
-#include <string>
+
 using namespace std;
 
 // Funciones para usuarios

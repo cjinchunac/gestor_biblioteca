@@ -1,7 +1,9 @@
 #ifndef libro_H
 #define libro_H
-#include<iostream>
-#include<string>
+
+#include <string>
+using namespace std;
+
 struct libro {
     int ID;
     string titulo;
@@ -9,6 +11,7 @@ struct libro {
     string genero;
     int cantidad;
 };
+
 void leerlibro(libro &lib, int id, string tit, string aut, string gen, int cant);
 void imprimelibro(libro &lib);
 void modificardatolibro(libro &lib);
