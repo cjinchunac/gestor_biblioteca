@@ -1,7 +1,9 @@
-#include"libro.h"
-#include<iostream>
-#include<string>
+#include "libro.h"
+
+#include <iostream>
+
 using namespace std;
+
 void leerlibro(libro &lib, int id, string tit, string aut, string gen, int cant) {
     lib.ID = id;
     lib.titulo = tit;
@@ -49,41 +51,61 @@ void borrarlibro(libro lista_libros[], int &n) {
     if (contador == 0)
         cout << "No se encontro libro con esa ID" << endl;
 }
-void devolverLibro(libro lista_libros[], int n_libros, prestamo prestamos[], int &n_prestamos) {
-    if (n_prestamos == 0) {
-        cout << "No hay prestamos registrados para devolver." << endl;
+
+void buscarPorAutor(libro lista_libros[], int n) {
+    if (n == 0) {
+        cout << "No hay libros registrados." << endl;
         return;
     }
     
-    int DNI, ID;
-    cout << "Ingrese DNI del usuario: ";
-    cin >> DNI;
-    cout << "Ingrese ID del libro a devolver: ";
-    cin >> ID;
+    string autor;
+    int contador = 0;
     
-    int encontrado = 0;
+    cin.ignore();
+    cout << "Ingrese el nombre del autor a buscar: ";
+    getline(cin, autor);
     
-    for (int i = 0; i < n_prestamos; i++) {
-        if (prestamos[i].usuarioPrestamo.DNI == DNI && 
-            prestamos[i].libroPrestado.ID == ID && 
-            prestamos[i].devuelto == 0) {
-            
-            prestamos[i].devuelto = 1;
-            
-            for (int j = 0; j < n_libros; j++) {
-                if (lista_libros[j].ID == ID) {
-                    lista_libros[j].cantidad++;
-                    break;
-                }
-            }
-            
-            cout << "Libro devuelto con exito!" << endl;
-            encontrado = 1;
-            break;
+    cout << "\nLIBROS DEL AUTOR " << autor << ":" << endl;
+    for (int i = 0; i < n; i++) {
+        if (lista_libros[i].autor == autor) {
+            cout << "---------------------" << endl;
+            imprimelibro(lista_libros[i]);
+            contador++;
         }
     }
     
-    if (!encontrado) {
-        cout << "No se encontro un prestamo activo con esos datos." << endl;
+    if (contador == 0) {
+        cout << "No se encontraron libros de este autor." << endl;
+    } else {
+        cout << "Total encontrados: " << contador << endl;
+    }
+}
+
+void buscarPorGenero(libro lista_libros[], int n) {
+    if (n == 0) {
+        cout << "No hay libros registrados." << endl;
+        return;
+    }
+    
+    string genero;
+    int contador = 0;
+    
+    cin.ignore();
+    cout << "Ingrese el genero a buscar: ";
+    getline(cin, genero);
+    
+    cout << "\nLIBROS DEL GENERO " << genero << ":" << endl;
+    for (int i = 0; i < n; i++) {
+        if (lista_libros[i].genero == genero) {
+            cout << "---------------------" << endl;
+            imprimelibro(lista_libros[i]);
+            contador++;
+        }
+    }
+    
+    if (contador == 0) {
+        cout << "No se encontraron libros de este genero." << endl;
+    } else {
+        cout << "Total encontrados: " << contador << endl;
     }
 }
