@@ -100,3 +100,36 @@ void registrarPrestamo(libro lista_libros[], int n_libros, prestamo prestamos[],
     
     cout << "Prestamo registrado con exito!" << endl;
 }
+
+void mostrarPrestamosUsuario(prestamo prestamos[], int n_prestamos) {
+    if (n_prestamos == 0) {
+        cout << "No hay prestamos registrados." << endl;
+        return;
+    }
+    
+    int DNI;
+    cout << "Ingrese DNI del usuario: ";
+    cin >> DNI;
+    
+    int contador = 0;
+    cout << "\nPRESTAMOS DEL USUARIO:" << endl;
+    for (int i = 0; i < n_prestamos; i++) {
+        if (prestamos[i].usuarioPrestamo.DNI == DNI) {
+            cout << "---------------------" << endl;
+            cout << "Libro: " << prestamos[i].libroPrestado.titulo << endl;
+            cout << "Autor: " << prestamos[i].libroPrestado.autor << endl;
+            cout << "Fecha prestamo: " << prestamos[i].fecha_prestamo[0] << "/" 
+                 << prestamos[i].fecha_prestamo[1] << "/" << prestamos[i].fecha_prestamo[2] << endl;
+            cout << "Fecha devolucion: " << prestamos[i].fecha_devolucion[0] << "/" 
+                 << prestamos[i].fecha_devolucion[1] << "/" << prestamos[i].fecha_devolucion[2] << endl;
+            cout << "Estado: " << (prestamos[i].devuelto ? "Devuelto" : "Pendiente") << endl;
+            contador++;
+        }
+    }
+    
+    if (contador == 0) {
+        cout << "No se encontraron prestamos para este usuario." << endl;
+    } else {
+        cout << "Total de prestamos: " << contador << endl;
+    }
+}
