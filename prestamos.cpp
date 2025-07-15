@@ -15,3 +15,88 @@ int puedePrestarMas(prestamo prestamos[], int n_prestamos, int DNI) {
     }
     return 1;
 }
+
+void registrarPrestamo(libro lista_libros[], int n_libros, prestamo prestamos[], int &n_prestamos, usuario usuarios[], int n_usuarios) {
+    if (n_usuarios == 0) {
+        cout << "No hay usuarios registrados. Registre al menos un usuario primero." << endl;
+        return;
+    }
+    
+    if (n_libros == 0) {
+        cout << "No hay libros registrados. Registre al menos un libro primero." << endl;
+        return;
+    }
+    
+    int ID, DNI, dia, mes, anio;
+    int usuario_index = -1, libro_index = -1;
+    
+    cout << "Ingrese DNI del usuario: ";
+    cin >> DNI;
+    
+    // Buscar usuario
+    for (int i = 0; i < n_usuarios; i++) {
+        if (usuarios[i].DNI == DNI) {
+            usuario_index = i;
+            break;
+        }
+    }
+    
+    if (usuario_index == -1) {
+        cout << "Usuario no encontrado. Registre al usuario primero." << endl;
+        return;
+    }
+    
+    if (!puedePrestarMas(prestamos, n_prestamos, DNI)) {
+        cout << "Este usuario ya tiene 3 prestamos activos. No puede pedir mas libros." << endl;
+        return;
+    }
+    
+    cout << "\nLibros disponibles:" << endl;
+    for (int i = 0; i < n_libros; i++) {
+        if (lista_libros[i].cantidad > 0) {
+            cout << "ID: " << lista_libros[i].ID << " - " << lista_libros[i].titulo;
+            cout << " (" << lista_libros[i].cantidad << " disponibles)" << endl;
+        }
+    }
+    
+    cout << "\nIngrese ID del libro a prestar: ";
+    cin >> ID;
+    
+    for (int i = 0; i < n_libros; i++) {
+        if (lista_libros[i].ID == ID && lista_libros[i].cantidad > 0) {
+            libro_index = i;
+            break;
+        }
+    }
+    
+    if (libro_index == -1) {
+        cout << "ID de libro no valido o no hay ejemplares disponibles." << endl;
+        return;
+    }
+    
+    cout << "Ingrese fecha de prestamo (dd mm aaaa): ";
+    cin >> dia >> mes >> anio;
+    
+    prestamos[n_prestamos].libroPrestado = lista_libros[libro_index];
+    prestamos[n_prestamos].usuarioPrestamo = usuarios[usuario_index];
+    prestamos[n_prestamos].fecha_prestamo[0] = dia;
+    prestamos[n_prestamos].fecha_prestamo[1] = mes;
+    prestamos[n_prestamos].fecha_prestamo[2] = anio;
+    
+    // Calcular fecha de devolucion (7 dias despues)
+    prestamos[n_prestamos].fecha_devolucion[0] = dia + 7;
+    prestamos[n_prestamos].fecha_devolucion[1] = mes;
+    prestamos[n_prestamos].fecha_devolucion[2] = anio;
+    
+    // Ajustar si pasamos de 31 dias
+    if (prestamos[n_prestamos].fecha_devolucion[0] > 31) {
+        prestamos[n_prestamos].fecha_devolucion[0] -= 31;
+        prestamos[n_prestamos].fecha_devolucion[1]++;
+    }
+    
+    prestamos[n_prestamos].devuelto = 0;
+    lista_libros[libro_index].cantidad--;
+    n_prestamos++;
+    
+    cout << "Prestamo registrado con exito!" << endl;
+}
